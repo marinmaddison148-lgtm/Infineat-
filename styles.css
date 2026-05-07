@@ -1,0 +1,118 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-display: "Cormorant Garamond", "Playfair Display", ui-serif, Georgia, serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-terracotta: var(--terracotta);
+  --color-gold: var(--gold);
+  --color-cream: var(--cream);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+}
+
+:root {
+  --radius: 0.25rem;
+
+  /* Warm, dark, cinematic palette */
+  --background: oklch(0.16 0.012 60);          /* near-black with warm undertone */
+  --foreground: oklch(0.94 0.018 80);          /* warm cream */
+  --card: oklch(0.20 0.014 60);
+  --card-foreground: oklch(0.94 0.018 80);
+  --popover: oklch(0.18 0.012 60);
+  --popover-foreground: oklch(0.94 0.018 80);
+
+  --primary: oklch(0.78 0.12 70);              /* muted gold */
+  --primary-foreground: oklch(0.16 0.012 60);
+  --secondary: oklch(0.24 0.018 50);
+  --secondary-foreground: oklch(0.94 0.018 80);
+  --muted: oklch(0.22 0.012 60);
+  --muted-foreground: oklch(0.68 0.022 70);
+  --accent: oklch(0.58 0.16 40);               /* terracotta */
+  --accent-foreground: oklch(0.96 0.018 80);
+
+  --terracotta: oklch(0.58 0.16 40);
+  --gold: oklch(0.78 0.12 70);
+  --cream: oklch(0.94 0.025 80);
+
+  --destructive: oklch(0.55 0.21 27);
+  --destructive-foreground: oklch(0.96 0.018 80);
+  --border: oklch(0.30 0.014 60 / 60%);
+  --input: oklch(0.28 0.014 60);
+  --ring: oklch(0.78 0.12 70);
+
+  --gradient-hero: linear-gradient(180deg, oklch(0.16 0.012 60 / 0.2) 0%, oklch(0.16 0.012 60 / 0.6) 50%, oklch(0.16 0.012 60 / 0.98) 100%);
+  --gradient-gold: linear-gradient(135deg, oklch(0.78 0.12 70) 0%, oklch(0.66 0.14 50) 100%);
+  --shadow-elegant: 0 30px 80px -20px oklch(0 0 0 / 0.6);
+  --shadow-glow: 0 0 60px -10px oklch(0.78 0.12 70 / 0.35);
+}
+
+.dark { color-scheme: dark; }
+
+@layer base {
+  * { border-color: var(--color-border); }
+  html { scroll-behavior: smooth; }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4, .font-display { font-family: var(--font-display); letter-spacing: -0.01em; }
+}
+
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+  .gradient-hero { background-image: var(--gradient-hero); }
+  .gradient-gold-text {
+    background: var(--gradient-gold);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .shadow-elegant { box-shadow: var(--shadow-elegant); }
+  .shadow-glow { box-shadow: var(--shadow-glow); }
+
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.9s ease-out, transform 0.9s ease-out; }
+  .reveal.in { opacity: 1; transform: none; }
+
+  .hairline { height: 1px; background: linear-gradient(90deg, transparent, var(--color-border), transparent); }
+
+  @keyframes float-up {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  .animate-float-up { animation: float-up 1s ease-out both; }
+
+  @keyframes shimmer {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+  }
+  .animate-shimmer { animation: shimmer 3s ease-in-out infinite; }
+}
